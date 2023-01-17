@@ -8,7 +8,7 @@ namespace EmployeePayroll
         static void Main(string[] args)
         {
             EmployeeRepository repository= new EmployeeRepository();
-            Console.WriteLine("Enter the Value\n1. Insert Data Into Table\n2. Get All Data\n3. Update Salary\n4. Update salary using Stored Procedure\n5. Get Data By Name");
+            Console.WriteLine("Enter the Value\n1. Insert Data Into Table\n2. Get All Data\n3. Update Salary\n4. Update salary using Stored Procedure\n5. Get Data By Name\n6. Get Data Between Date");
             int op = Convert.ToInt32(Console.ReadLine());
             while (true)
             {
@@ -112,6 +112,13 @@ namespace EmployeePayroll
                         Console.WriteLine("Enter the Name");
                         model2.Name = Console.ReadLine();
                         repository.GetDataByName(model2.Name);
+                        break;
+                    case 6:
+                        Console.WriteLine("Enter Starting date");
+                        string startdate1 = Console.ReadLine();
+                        Console.WriteLine("Enter End date");
+                        string enddate = Console.ReadLine();
+                        repository.JoinedBetweenDate(startdate1, enddate);
                         break;
                 }
                 break;

@@ -236,5 +236,48 @@ namespace EmployeePayroll.Repository
                 Console.WriteLine("Connection Closed");
             }
         }
+        public void JoinedBetweenDate(string startdate, string enddate)
+        {
+            EmployeeModel empmodel = new EmployeeModel();
+            try
+            {
+                using (connection)
+                {
+                    string Query = $@"select * from Employee where Start_date between CAST('{startdate}' as date) and CAST('{enddate}' as date);";
+                    SqlCommand cmd = new SqlCommand(Query, connection);
+                    connection.Open();
+                    Console.WriteLine("Connection Established");
+                    SqlDataReader datareader = cmd.ExecuteReader();
+                    if (datareader.HasRows)
+                    {
+                        while (datareader.Read())
+                        {
+                            empmodel.id = datareader.GetInt32(0);
+                            empmodel.Name = datareader.GetString(1);
+                            empmodel.PhoneNumber = datareader.GetInt64(2);
+                            empmodel.Address = datareader.GetString(3);
+                            empmodel.Department = datareader.GetString(4);
+                            empmodel.Gender = Convert.ToChar(datareader.GetValue(5));
+                            empmodel.Basic_Pay = datareader.GetInt64(6);
+                            empmodel.Deductions = datareader.GetInt64(7);
+                            empmodel.Taxable_Pay = datareader.GetInt64(8);
+                            empmodel.Tax = datareader.GetInt64(9);
+                            empmodel.Net_Pay = datareader.GetInt64(10);
+                            empmodel.Start_Date = datareader.GetDateTime(11);
+                            Console.WriteLine(empmodel.id + " " + empmodel.Name + " " + empmodel.PhoneNumber + " " + empmodel.Address + " " + empmodel.Department + " " + empmodel.Gender + " " + empmodel.Basic_Pay + " " + empmodel.Deductions + " " + empmodel.Taxable_Pay + " " + empmodel.Tax + " " + empmodel.Net_Pay + " " + empmodel.Start_Date.ToShortDateString());
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+                Console.WriteLine("Connection Closed");
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace EmployeePayroll
         static void Main(string[] args)
         {
             EmployeeRepository repository= new EmployeeRepository();
-            Console.WriteLine("Enter the Value\n1. Insert Data Into Table\n2. Get All Data\n3. Update Salary\n4. Update salary using Stored Procedure");
+            Console.WriteLine("Enter the Value\n1. Insert Data Into Table\n2. Get All Data\n3. Update Salary\n4. Update salary using Stored Procedure\n5. Get Data By Name");
             int op = Convert.ToInt32(Console.ReadLine());
             while (true)
             {
@@ -106,6 +106,12 @@ namespace EmployeePayroll
                         Console.WriteLine("Enter id");
                         model1.id = Convert.ToInt32(Console.ReadLine());
                         repository.UpdateSalaryStoredProcedure(model1.Basic_Pay, model1.Deductions, model1.Taxable_Pay, model1.Tax, model1.Net_Pay,model1.id);
+                        break;
+                    case 5:
+                        EmployeeModel model2 = new EmployeeModel();
+                        Console.WriteLine("Enter the Name");
+                        model2.Name = Console.ReadLine();
+                        repository.GetDataByName(model2.Name);
                         break;
                 }
                 break;

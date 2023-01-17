@@ -54,8 +54,8 @@ namespace EmployeePayroll.Repository
                             empmodel.Taxable_Pay = datareader.GetInt64(8);
                             empmodel.Tax = datareader.GetInt64(9);
                             empmodel.Net_Pay = datareader.GetInt64(10);
-                            empmodel.Start_Date= datareader.GetDateTime(11);
-                            Console.WriteLine(empmodel.id + " " + empmodel.Name + " " + empmodel.PhoneNumber + " " + empmodel.Address + " " + empmodel.Department + " " + empmodel.Gender + " " + empmodel.Basic_Pay + " " + empmodel.Deductions + " " + empmodel.Taxable_Pay + " " + empmodel.Tax + " " + empmodel.Net_Pay + " " + empmodel.Start_Date.ToShortDateString()); 
+                            empmodel.Start_Date = datareader.GetDateTime(11);
+                            Console.WriteLine(empmodel.id + " " + empmodel.Name + " " + empmodel.PhoneNumber + " " + empmodel.Address + " " + empmodel.Department + " " + empmodel.Gender + " " + empmodel.Basic_Pay + " " + empmodel.Deductions + " " + empmodel.Taxable_Pay + " " + empmodel.Tax + " " + empmodel.Net_Pay + " " + empmodel.Start_Date.ToShortDateString());
                         }
                     }
                 }
@@ -63,6 +63,36 @@ namespace EmployeePayroll.Repository
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+                Console.WriteLine("Connection Closed");
+            }
+        }
+        public void UpdateSalary()
+        {
+            try
+            {
+                using (connection)
+                {
+                    SqlCommand cmd = new SqlCommand(@"Update Employee set Basic_Pay=300000 where id=3", connection);
+                    connection.Open();
+                    Console.WriteLine("Connection Established");
+                    var objreader = cmd.ExecuteNonQuery();
+                    if (objreader >= 1)
+                    {
+                        Console.WriteLine("Data updated");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Data not updated");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             finally
             {

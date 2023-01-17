@@ -8,7 +8,7 @@ namespace EmployeePayroll
         static void Main(string[] args)
         {
             EmployeeRepository repository= new EmployeeRepository();
-            Console.WriteLine("Enter the Value\n1. Insert Data Into Table\n2. Get All Data\n3. Update Salary\n4. Update salary using Stored Procedure\n5. Get Data By Name\n6. Get Data Between Date");
+            Console.WriteLine("Enter the Value\n1. Insert Data Into Table\n2. Get All Data\n3. Update Salary\n4. Update salary using Stored Procedure\n5. Get Data By Name\n6. Get Data Between Date\n7.Operations On Database");
             int op = Convert.ToInt32(Console.ReadLine());
             while (true)
             {
@@ -119,6 +119,36 @@ namespace EmployeePayroll
                         Console.WriteLine("Enter End date");
                         string enddate = Console.ReadLine();
                         repository.JoinedBetweenDate(startdate1, enddate);
+                        break;
+                    case 7:
+                        Console.WriteLine("Enter Opration\n1. Sum Of All Salaries\n2. Average Salary\n3. Minimum Salary\n4. Maximum Salary\n5. Count of Male Employee\n6. Count of Female Employee");
+                        int op1 = Convert.ToInt32(Console.ReadLine());
+                        Operations opn = new Operations();
+                        while (true)
+                        {
+                            switch (op1)
+                            {
+                                case 1:
+                                    opn.Sum();
+                                    break;
+                                case 2:
+                                    opn.Avg();
+                                    break;
+                                case 3:
+                                    opn.Min();
+                                    break;
+                                case 4:
+                                    opn.Max();
+                                    break;
+                                case 5:
+                                    opn.CountMale();
+                                    break;
+                                case 6:
+                                    opn.CountFeMale();
+                                    break;
+                            }
+                            break;
+                        }
                         break;
                 }
                 break;
